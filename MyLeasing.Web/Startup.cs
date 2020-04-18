@@ -41,6 +41,8 @@ namespace MyLeasing.Web
             });
             services.AddTransient<SeedDb>();
             services.AddScoped<IUserHelper, UserHelper>();
+            services.AddScoped<ICombosHelper, CombosHelper>();
+            services.AddScoped<IConverterHelper, ConverterHelper>();
             services.AddIdentity<User, IdentityRole>(cfg =>
             {
                 cfg.User.RequireUniqueEmail = true;
