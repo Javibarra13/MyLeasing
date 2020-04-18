@@ -11,44 +11,134 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Document)
+            @Html.DisplayNameFor(model => model.User.Document)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Document)
+            @Html.DisplayFor(model => model.User.Document)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.User.FirstName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.FirstName)
+            @Html.DisplayFor(model => model.User.FirstName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model.User.LastName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.LastName)
+            @Html.DisplayFor(model => model.User.LastName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.FixedPhone)
+            @Html.DisplayNameFor(model => model.User.Email)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.FixedPhone)
+            @Html.DisplayFor(model => model.User.Email)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.CellPhone)
+            @Html.DisplayNameFor(model => model.User.Address)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CellPhone)
+            @Html.DisplayFor(model => model.User.Address)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Address)
+            Phone Number
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Address)
+            @Html.DisplayFor(model => model.User.PhoneNumber)
+        </dd>
+        <dt>
+            Properties
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Properties.Count)
+        </dd>
+        <dt>
+            Contracts
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Contracts.Count)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-info">Edit</a> |
+    <a asp-action="AddProperty" asp-route-id="@Model.Id" class="btn btn-primary">Add Property</a> |
+    <a asp-action="Index" class="btn btn-default">Back to List</a>
 </div>
+<br />
+<h2>Properties</h2>
+@if (Model.Properties.Count == 0)
+{
+    <h5>Not properties added yet</h5>
+}
+
+else
+{
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Properties.FirstOrDefault().Neighborhood)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Properties.FirstOrDefault().Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Properties.FirstOrDefault().Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Properties.FirstOrDefault().Rooms)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Properties.FirstOrDefault().Stratum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Properties.FirstOrDefault().IsAvailable)
+            </th>
+            <th>
+                Images
+            </th>
+            <th>
+                Contracts
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Properties)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Neighborhood)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rooms)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stratum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAvailable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PropertyImages.Count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contracts.Count)
+            </td>
+            <td>
+                <a asp-action="EditProperty" asp-route-id="@item.Id" class="btn btn-info">Edit</a> |
+                <a asp-action="DetailsProperty" asp-route-id="@item.Id" class="btn btn-warning">Details</a> |
+                <a asp-action="DeleteProperty" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        }
+        </tbody>
+    </table>
+}
