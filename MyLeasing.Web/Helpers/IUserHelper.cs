@@ -23,6 +23,8 @@ namespace MyLeasing.Web.Helpers
 
         Task<IdentityResult> UpdateUserAsync(User user);
 
+        Task<SignInResult> ValidatePasswordAsync(User user, string password);
+
         Task LogoutAsync();
 
 
