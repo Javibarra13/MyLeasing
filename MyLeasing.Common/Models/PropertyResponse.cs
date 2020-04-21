@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MyLeasing.Common.Models
@@ -32,5 +33,8 @@ namespace MyLeasing.Common.Models
 
         public ICollection<ContractResponse> Contracts { get; set; }
 
+        public string FirstImage => PropertyImages == null || PropertyImages.Count == 0 
+            ? "https://webstudioleasing.azurewebsites.net/images/Properties/download.png" 
+            : PropertyImages.FirstOrDefault().ImageUrl;
     }
 }
