@@ -22,5 +22,7 @@ namespace MyLeasing.Common.Models
 
         public ICollection<PropertyResponse> Properties { get; set; }
 
+        public string FullName => $"{FirstName} {LastName}";
+
     }
 }

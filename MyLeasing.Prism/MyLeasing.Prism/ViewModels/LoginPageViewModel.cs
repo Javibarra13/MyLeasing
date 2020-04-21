@@ -9,6 +9,7 @@ namespace MyLeasing.Prism.ViewModels
 {
     public class LoginPageViewModel : ViewModelBase
     {
+        private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
         private string _password;
         private bool _isRunning;
@@ -19,9 +20,10 @@ namespace MyLeasing.Prism.ViewModels
             INavigationService navigationService,
             IApiService apiService) : base(navigationService)
         {
+            _navigationService = navigationService;
             _apiService = apiService;
             Title = "Login";
-            IsEnable = true;
+            IsEnabled = true;
         }
         public DelegateCommand LoginCommand => _loginCommand ?? (_loginCommand = new DelegateCommand(Login));
 
@@ -31,7 +33,7 @@ namespace MyLeasing.Prism.ViewModels
 
         public bool IsRunning { get => _isRunning; set => SetProperty(ref _isRunning, value); }
 
-        public bool IsEnable { get => _isEnable; set => SetProperty(ref _isEnable, value); }
+        public bool IsEnabled { get => _isEnable; set => SetProperty(ref _isEnable, value); }
 
         private async void Login()
         {
@@ -47,31 +49,55 @@ namespace MyLeasing.Prism.ViewModels
                 return;
             }
 
+            IsRunning = true;
+            IsEnabled = false;
+
+            var url = App.Current.Resources["UrlAPI"].ToString();
+            var connection = await _apiService.CheckConnectionAsync(url);
+            if (!connection)
+            {
+                IsEnabled = true;
+                IsRunning = false;
+                await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection.", "Accept");
+                return;
+            }
+
             var request = new TokenRequest
             {
                 Password = Password,
                 Username = Email
             };
 
-            IsRunning = true;
-            IsEnable = false;
-
-            var url = App.Current.Resources["UrlAPI"].ToString();
             var response = await _apiService.GetTokenAsync(url, "Account", "/CreateToken", request);
 
-            if(!response.IsSuccess)
+            if (!response.IsSuccess)
             {
+                IsRunning = false;
+                IsEnabled = true;
                 await App.Current.MainPage.DisplayAlert("Error", "User or Password incorrect", "Acept");
                 Password = string.Empty;
                 return;
             }
 
-            IsRunning = false;
-            IsEnable = true;
-
             var token = response.Result;
+            var response2 = await _apiService.GetOwnerByEmailAsync(url, "api", "/Owners/GetOwnerByEmail", "bearer", token.Token, Email);
+            if (!response.IsSuccess)
+            {
+                IsRunning = false;
+                IsEnabled = true;
+                await App.Current.MainPage.DisplayAlert("Error", "Problem with user data, call 1-800-SUPPORT", "Acept");
+                return;
+            }
 
-            await App.Current.MainPage.DisplayAlert("Ok", "Fuck Yeah !!!", "Acept");
+            var owner = response2.Result;
+            var parameters = new NavigationParameters 
+            {
+                { "owner", owner } 
+            };
+
+            await _navigationService.NavigateAsync("PropertiesPage", parameters);
+            IsRunning = false;
+            IsEnabled = true;
         }
 
     }
