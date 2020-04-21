@@ -9,15 +9,15 @@
     <ScrollView>
         <StackLayout Padding="10">
             <ffimageloading:CachedImage
-	                Grid.Column="0"
+                    Aspect="AspectFit"
 	                Source="{Binding Property.FirstImage}"
 	                LoadingPlaceholder= "LoaderImage"
 	                ErrorPlaceholder= "ErrorImage"
+                    HeightRequest="300"
 	                CacheDuration= "50"
 	                RetryCount= "3"
 	                RetryDelay= "600"
-	                DownsampleToViewSize = "true"
-	                WidthRequest="300"/>
+	                DownsampleToViewSize = "true"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
