@@ -2,9 +2,9 @@
 
 namespace MyLeasing.Prism.Views
 {
-    public partial class PropertyPage : ContentPage
+    public partial class ContractPage : ContentPage
     {
-        public PropertyPage()
+        public ContractPage()
         {
             InitializeComponent();
         }
