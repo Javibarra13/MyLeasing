@@ -189,6 +189,12 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator">
+      <Version>18.1.0.45</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator.IOS">
+      <Version>18.1.0.45</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfRotator">
       <Version>18.1.0.45</Version>
     </PackageReference>
@@ -212,6 +218,15 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_more_vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_action_details.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_action_list_alt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

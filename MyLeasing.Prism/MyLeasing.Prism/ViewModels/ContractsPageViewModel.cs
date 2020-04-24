@@ -1,6 +1,7 @@
-﻿using MyLeasing.Common.Models;
+﻿using MyLeasing.Common.Helpers;
+using MyLeasing.Common.Models;
+using Newtonsoft.Json;
 using Prism.Navigation;
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -16,23 +17,20 @@ namespace MyLeasing.Prism.ViewModels
         {
             _navigationService = navigationService;
             Title = "Contracts";
+            Property = JsonConvert.DeserializeObject<PropertyResponse>(Settings.Property);
+            LoadContracts();
+        }
+
+        public PropertyResponse Property
+        {
+            get => _property;
+            set => SetProperty(ref _property, value);
         }
 
         public ObservableCollection<ContractItemViewModel> Contracts
         {
             get => _contracts;
             set => SetProperty(ref _contracts, value);
-        }
-
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            base.OnNavigatedTo(parameters);
-
-            if (parameters.ContainsKey("property"))
-            {
-                _property = parameters.GetValue<PropertyResponse>("property");
-                LoadContracts();
-            }
         }
 
         private void LoadContracts()

@@ -25,6 +25,7 @@ namespace MyLeasing.Prism.ViewModels
             {
                 { "contract", this }
             };
+
             await _navigationService.NavigateAsync("ContractPage", parameters);
         }
     }

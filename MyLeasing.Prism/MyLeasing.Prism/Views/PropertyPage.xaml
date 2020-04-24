@@ -5,6 +5,7 @@
          	 xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"        	 
          	 xmlns:syncfusion="clr-namespace:Syncfusion.SfRotator.XForms;assembly=Syncfusion.SfRotator.XForms"
              x:Class="MyLeasing.Prism.Views.PropertyPage"
+             IconImageSource="ic_action_details"
              Title="{Binding Title}">
     <ScrollView>
         <StackLayout Padding="10">
@@ -16,7 +17,7 @@
             	ItemsSource="{Binding ImageCollection}"
             	NavigationDelay="5000"
             	NavigationDirection="Horizontal"
-            	NavigationStripMode="Dots"
+            	NavigationStripMode="Thumbnail"
             	NavigationStripPosition="Bottom">
                 <syncfusion:SfRotator.ItemTemplate>
                     <DataTemplate>

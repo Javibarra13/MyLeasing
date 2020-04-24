@@ -55,6 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator">
+      <Version>18.1.0.45</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator.Android">
+      <Version>18.1.0.45</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfRotator">
       <Version>18.1.0.45</Version>
     </PackageReference>
@@ -110,6 +116,15 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_more_vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_action_details.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_action_list_alt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
