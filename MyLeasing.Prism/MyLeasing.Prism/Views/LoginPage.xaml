@@ -37,7 +37,7 @@
                     VerticalOptions="EndAndExpand"/>
             </StackLayout>
             <busyindicator:SfBusyIndicator  
-                	AnimationType="RollingBall"
+                	AnimationType="Ball"
                 	AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
                 	AbsoluteLayout.LayoutFlags="All"
                 	BackgroundColor="Transparent"
