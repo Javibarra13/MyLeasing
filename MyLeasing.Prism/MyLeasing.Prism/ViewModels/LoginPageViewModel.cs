@@ -26,8 +26,11 @@ namespace MyLeasing.Prism.ViewModels
             _apiService = apiService;
             Title = "Login";
             IsEnabled = true;
+            IsRemember = true;
         }
         public DelegateCommand LoginCommand => _loginCommand ?? (_loginCommand = new DelegateCommand(Login));
+
+        public bool IsRemember { get; set; }
 
         public string Email { get; set; }
 

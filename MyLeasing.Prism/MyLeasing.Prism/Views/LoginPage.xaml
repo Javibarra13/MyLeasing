@@ -5,6 +5,7 @@
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="MyLeasing.Prism.Views.LoginPage"
+             BackgroundColor="{StaticResource colorBackgroud}"
              Title="{Binding Title}">
     <ScrollView>
         <AbsoluteLayout>
@@ -26,23 +27,47 @@
                     IsPassword="True"
                     Placeholder="Enter your Password..."
                     Text="{Binding Password}"/>
-                <Button
-                    BackgroundColor="Navy"
-                    CornerRadius="23"
+                <StackLayout
+	                HorizontalOptions="Center"
+	                Orientation="Horizontal">
+                <Label
+    	            Text="Rememberme in this device"
+    	            VerticalOptions="Center"/>
+                <CheckBox
+    	            IsChecked="{Binding IsRemember}"/>
+                </StackLayout>
+                <Label
+	                HorizontalOptions="Center"
+	                FontAttributes="Bold"
+	                Text="Forgot your password?"
+	                TextColor="{StaticResource colorPrimary}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <StackLayout
+                    Orientation="Horizontal"
+                    VerticalOptions="EndAndExpand">
+                    <Button
                     Command="{Binding LoginCommand}"
-                    HeightRequest="46"
                     IsEnabled="{Binding IsEnable}"
                     Text="Login"
-                    TextColor="White"
-                    VerticalOptions="EndAndExpand"/>
+                    />
+                    <Button
+                    Command="{Binding RegisterCommand}"
+                    IsEnabled="{Binding IsEnable}"
+                    Style="{StaticResource secondaryButton}"
+                    Text="Register"
+                    />
+                </StackLayout>
             </StackLayout>
             <busyindicator:SfBusyIndicator  
                 	AnimationType="Ball"
                 	AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
                 	AbsoluteLayout.LayoutFlags="All"
-                	BackgroundColor="Transparent"
+                	BackgroundColor="{StaticResource colorDanger}"
                 	HorizontalOptions="Center"
-                	TextColor="Navy"
+                	TextColor="{StaticResource colorFontInverse}"
                 	IsVisible="{Binding IsRunning}"
                 	Title="Loading..."
                 	VerticalOptions="Center"
