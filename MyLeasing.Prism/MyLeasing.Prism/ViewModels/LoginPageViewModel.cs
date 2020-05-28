@@ -17,6 +17,8 @@ namespace MyLeasing.Prism.ViewModels
         private bool _isRunning;
         private bool _isEnable;
         private DelegateCommand _loginCommand;
+        private DelegateCommand _registerCommand;
+        private DelegateCommand _forgotPasswordCommand;
 
         public LoginPageViewModel(
             INavigationService navigationService,
@@ -29,6 +31,10 @@ namespace MyLeasing.Prism.ViewModels
             IsRemember = true;
         }
         public DelegateCommand LoginCommand => _loginCommand ?? (_loginCommand = new DelegateCommand(Login));
+
+        public DelegateCommand RegisterCommand => _registerCommand ?? (_registerCommand = new DelegateCommand(Register));
+
+        public DelegateCommand ForgotPasswordCommand => _forgotPasswordCommand ?? (_forgotPasswordCommand = new DelegateCommand(ForgotPassword));
 
         public bool IsRemember { get; set; }
 
@@ -97,11 +103,20 @@ namespace MyLeasing.Prism.ViewModels
             var owner = response2.Result;
             Settings.Owner = JsonConvert.SerializeObject(owner);
             Settings.Token = JsonConvert.SerializeObject(token);
+            Settings.IsRemembered = IsRemember;
 
             await _navigationService.NavigateAsync("/LeasingMasterDetailPage/NavigationPage/PropertiesPage");
             IsRunning = false;
             IsEnabled = true;
         }
+        private async void Register()
+        {
+            await _navigationService.NavigateAsync("RegisterPage");
+        }
 
+        private async void ForgotPassword()
+        {
+            await _navigationService.NavigateAsync("RememberPasswordPage");
+        }
     }
 }

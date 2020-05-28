@@ -5,6 +5,10 @@ using MyLeasing.Prism.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using MyLeasing.Common.Services;
+using Newtonsoft.Json;
+using MyLeasing.Common.Models;
+using MyLeasing.Common.Helpers;
+using System;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MyLeasing.Prism
@@ -24,6 +28,16 @@ namespace MyLeasing.Prism
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjYyNDYyQDMxMzgyZTMxMmUzMEsvR3ZSbVE2cVZRMXRodWMrbEdjNUM3eVFtYktLTmhjbThnOUtiN1dpcFE9");
 
+            var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+            if (Settings.IsRemembered && token?.Expiration > DateTime.Now)
+            {
+                await NavigationService.NavigateAsync("/LeasingMasterDetailPage/NavigationPage/PropertiesPage");
+            }
+            else
+            {
+                await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
+            }
+
             InitializeComponent();
 
             await NavigationService.NavigateAsync("NavigationPage/LoginPage");
@@ -42,6 +56,9 @@ namespace MyLeasing.Prism
             containerRegistry.RegisterForNavigation<LeasingMasterDetailPage, LeasingMasterDetailPageViewModel>();
             containerRegistry.RegisterForNavigation<ModifyUserPage, ModifyUserPageViewModel>();
             containerRegistry.RegisterForNavigation<MapPage, MapPageViewModel>();
+            containerRegistry.RegisterForNavigation<RegisterPage, RegisterPageViewModel>();
+            containerRegistry.RegisterForNavigation<RememberPasswordPage, RememberPasswordPageViewModel>();
+            containerRegistry.RegisterForNavigation<ChangePasswordPage, ChangePasswordPageViewModel>();
         }
     }
 }
